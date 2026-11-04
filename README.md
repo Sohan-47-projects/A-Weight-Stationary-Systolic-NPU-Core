@@ -17,8 +17,8 @@ If you want to simulate the RTL yourself, **I strongly recommend using Verilator
 
 
 ### Hardware Datapath (`rtl/`)
-* **Processing Elements (`PE.sv`):** Each PE holds a stationary 16-bit weight ($W$), multiplies it against a streaming 16-bit activation ($A$), and accumulates the product into a vertically propagating 32-bit partial sum:
-  \text{PS}_{\text{out}} = \text{PS}_{\text{in}} + (A \times W)
+- **Processing Elements (`PE.sv`):** Each PE holds a stationary 16-bit weight (`W`), multiplies it against a streaming 16-bit activation (`A`), and accumulates the product into a vertically propagating 32-bit partial sum:
+  `PS_out = PS_in + (A × W)`
 * **Systolic Array (`systolic.sv`):** 16 PEs arranged in a 4×4 grid. Activations flow left-to-right; partial sums flow top-to-bottom:
 
 <img width="1024" height="765" alt="systoli" src="https://github.com/user-attachments/assets/e9d9593d-1a2f-46f1-950b-a4d0660b1e56" />
