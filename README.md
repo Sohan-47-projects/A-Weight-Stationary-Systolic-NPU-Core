@@ -4,12 +4,7 @@
 [![Architecture](https://img.shields.io/badge/Architecture-Systolic_Array_(Weight--Stationary)-orange)](#hardware-datapath)
 
 
-A custom Neural Processing Unit (NPU) core built from scratch in SystemVerilog and C++. It features a 4×4 weight-stationary INT16/INT32 systolic array, dedicated tile buffers, a deterministic FSM controller, and a software matrix-tiling engine capable of computing arbitrary matrix dimensions.
-
-### A Quick Note on the Simulation Setup
-This project demonstrates a functional NPU core alongside a tiny misadventure of mine trying to call simulated hardware directly from a custom made C++ library. The C++-to-RTL bridge currently relies on the AMD Vivado Xilinx Simulation Interface (`XSI`), which makes the software side heavily dependent on a local Vivado installation. 
-
-If you want to simulate the RTL yourself, **I strongly recommend using Verilator instead**. Once I get my hands on a physical FPGA board, I will replace the simulation backend with actual hardware drivers and an AXI bus wrapper. Until then, here is the co-simulation implementation, feel free to ignore the XSI-dependent files (`xsi_backend.*`, `npu_xsi_top.sv`) unless you already have the Vivado toolchain installed.
+A custom Neural Processing Unit (NPU) core built from scratch in SystemVerilog and C++. It features a 4×4 weight-stationary INT16/INT32 systolic array, dedicated tile buffers, a deterministic FSM controller, and a software matrix-tiling engine capable of computing arbitrary matrix dimensions. This paper (https://arxiv.org/abs/1704.04760) on TPUv1's architecture is foundational to this implementation.
 
 ## System Architecture
 
@@ -113,6 +108,10 @@ If you have AMD Vivado (tested on 2019.1) and MinGW-w64 (`g++`) installed on Win
    ```powershell
    .\example.exe
    ```
+### A Quick Note on the Simulation Setup
+This project demonstrates a functional NPU core alongside a tiny misadventure of mine trying to call simulated hardware directly from a custom made C++ library. The C++-to-RTL bridge currently relies on the AMD Vivado Xilinx Simulation Interface (`XSI`), which makes the software side heavily dependent on a local Vivado installation. 
+
+If you want to simulate the RTL yourself, **I strongly recommend using Verilator instead**. Once I get my hands on a physical FPGA board, I will replace the simulation backend with actual hardware drivers and an AXI bus wrapper. Until then, here is the co-simulation implementation, feel free to ignore the XSI-dependent files (`xsi_backend.*`, `npu_xsi_top.sv`) unless you already have the Vivado toolchain installed.
 
 ## Future Work
 * Add an **AXI4-Lite / AXI-DMA** wrapper to replace the wide XSI top-level ports and bring IOB count within physical FPGA constraints.
